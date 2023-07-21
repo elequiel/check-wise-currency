@@ -1,4 +1,4 @@
-name: Alert ticket price
+name: Alert currency price
 
 on:
   schedule:
