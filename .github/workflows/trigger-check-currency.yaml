@@ -1,0 +1,28 @@
+name: Alert ticket price
+
+on:
+  schedule:
+    # Runs "every 8 hours" (see https://crontab.guru)
+    - cron: '0 10-23/2 * * *'
+    #- cron: '* */2 * * *'
+
+# Manual trigger
+#on: 
+#  workflow_dispatch:
+
+env:
+  CHAT_ID: ${{secrets.CHAT_ID}}
+  TELEGRAM_API_KEY: ${{secrets.TELEGRAM_API_KEY}}
+
+jobs:
+  run_script:
+    name: Run script .py
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      # - name: Install Dependencies
+      #   run: pip install -r requirements.txt
+      - name: Run script
+        run: python3 main.py
