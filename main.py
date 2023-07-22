@@ -1,8 +1,11 @@
 import json, requests, datetime
-from decouple import config
+import os
 
-TELEGRAM_API_KEY = config('TELEGRAM_API_KEY')
-CHAT_ID = config('CHAT_ID')
+from dotenv import load_dotenv
+load_dotenv()
+
+TELEGRAM_API_KEY = os.getenv('TELEGRAM_API_KEY')
+CHAT_ID = os.getenv('CHAT_ID')
 
 headers = {'Authorization': 'Basic OGNhN2FlMjUtOTNjNS00MmFlLThhYjQtMzlkZTFlOTQzZDEwOjliN2UzNmZkLWRjYjgtNDEwZS1hYzc3LTQ5NGRmYmEyZGJjZA=='}
 
