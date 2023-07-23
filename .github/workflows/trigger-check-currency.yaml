@@ -1,14 +1,14 @@
 name: Alert currency price
 
-# on:
-#   schedule:
-#     # Runs "every 8 hours" (see https://crontab.guru)
-#     - cron: '0 * * * *'
-#     #- cron: '* */2 * * *'
+on:
+  schedule:
+    # Runs "every 8 hours" (see https://crontab.guru)
+    - cron: '0 * * * *'
+    #- cron: '* */2 * * *'
 
 # Manual trigger
-on: 
- workflow_dispatch:
+# on: 
+#  workflow_dispatch:
 
 env:
   CHAT_ID: ${{secrets.CHAT_ID}}
