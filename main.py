@@ -6,6 +6,8 @@ load_dotenv()
 
 TELEGRAM_API_KEY = os.getenv('TELEGRAM_API_KEY')
 CHAT_ID = os.getenv('CHAT_ID')
+SOURCE_CURRENCY = os.getenv('SOURCE_CURRENCY')
+TARGET_CURRENCY = os.getenv('TARGET_CURRENCY')
 
 headers = {'Authorization': 'Basic OGNhN2FlMjUtOTNjNS00MmFlLThhYjQtMzlkZTFlOTQzZDEwOjliN2UzNmZkLWRjYjgtNDEwZS1hYzc3LTQ5NGRmYmEyZGJjZA=='}
 
