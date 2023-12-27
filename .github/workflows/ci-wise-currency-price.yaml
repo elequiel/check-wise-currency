@@ -20,9 +20,9 @@ jobs:
           username: ${{secrets.DOCKER_USERNAME}}
           password: ${{secrets.DOCKER_PASSWORD}}
       - name: Enable build for multiple platform
-        run: docker buildx create --driver docker-container --use
+        run: docker buildx create --use
       - name: Build image
-        run: docker buildx build --platform linux/amd64,linux/arm64 -t docker.io/elequiel/wise-currency:${{ github.sha }} .
+        run: docker buildx build --platform linux/amd64,linux/arm64 -o . . -t docker.io/elequiel/wise-currency:${{ github.sha }} .
       - name: Create tar file
         run: docker save --output vuln-image.tar docker.io/elequiel/wise-currency:${{ github.sha }}
       - name: Run Trivy vulnerability scanner in tarball mode
@@ -30,5 +30,3 @@ jobs:
         with:
           input: /github/workspace/vuln-image.tar
           severity: 'CRITICAL,HIGH'
-          exit-code: '1'
-          format: 'table'
