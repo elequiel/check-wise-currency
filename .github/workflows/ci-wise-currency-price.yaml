@@ -1,14 +1,14 @@
 name: CI wise
 
-on:
-  push:
-    branches:
-        - main
-        - 'realease/**'
+# on:
+#   push:
+#     branches:
+#         - main
+#         - 'realease/**'
 
 # Manual trigger
-# on: 
-#  workflow_dispatch:
+on: 
+ workflow_dispatch:
 
 jobs:
   build_image:
