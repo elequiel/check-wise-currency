@@ -4,6 +4,7 @@ on:
   push:
   workflow_dispatch: # Manual trigger
 
+
 jobs:
   build_image:
     name: Build Docker image
@@ -24,6 +25,8 @@ jobs:
         run: docker buildx create --driver docker-container --use
       - name: Build image
         run: docker buildx build --platform linux/amd64,linux/arm64 -t docker.io/elequiel/wise-currency:${{ github.sha }} .
+      - name: Set containerd env
+        run: export CONTAINERD_ADDRESS=/run/containerd/containerd.sock
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
@@ -33,5 +36,5 @@ jobs:
           ignore-unfixed: true
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
-      - name: Build image
+      - name: Push image
         run: docker push docker.io/elequiel/wise-currency:${{ github.sha }}
