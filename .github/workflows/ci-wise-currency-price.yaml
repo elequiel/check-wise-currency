@@ -27,4 +27,4 @@ jobs:
       - name: Enable build for multiple platform
         run: docker buildx create --use
       - name: Build image
-        run: docker buildx build --platform linux/amd64,linux/arm64 -t elequiel/wise-currency:$GITHUB_SHA .
+        run: docker buildx build --platform linux/amd64,linux/arm64 --push -t elequiel/wise-currency:$GITHUB_SHA .
