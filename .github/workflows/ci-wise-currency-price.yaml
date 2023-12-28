@@ -1,14 +1,9 @@
 name: CI wise
 
-# on:
-#   push:
-#     branches:
-#         - main
-#         - 'realease/**'
+on:
+  push:
+  workflow_dispatch: # Manual trigger
 
-# Manual trigger
-on: 
- workflow_dispatch:
 
 jobs:
   build_image:
@@ -25,9 +20,9 @@ jobs:
           username: ${{secrets.DOCKER_USERNAME}}
           password: ${{secrets.DOCKER_PASSWORD}}
       - name: Enable build for multiple platform
-        run: docker buildx create --driver docker-container --use
-      - name: Build image
-        run: docker buildx build --platform linux/amd64,linux/arm64 -t docker.io/elequiel/wise-currency:${{ github.sha }} .
+        run: docker buildx create --driver=docker-container --name=container --use
+      - name: Build image amd64 for scanning
+        run: docker buildx build --platform linux/amd64 --load -t docker.io/elequiel/wise-currency:${{ github.sha }} .
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
@@ -37,5 +32,5 @@ jobs:
           ignore-unfixed: true
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
-      - name: Build image
-        run: docker push docker.io/elequiel/wise-currency:${{ github.sha }}
+      - name: Build and push image
+        run: docker buildx build --platform linux/amd64,linux/arm64 --push -t docker.io/elequiel/wise-currency:${{ github.sha }} .
