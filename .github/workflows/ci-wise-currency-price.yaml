@@ -23,8 +23,6 @@ jobs:
         run: docker buildx create --driver=docker-container --name=container --use
       - name: Build image amd64 for scanning
         run: docker buildx build --platform linux/amd64 --load -t docker.io/elequiel/wise-currency:${{ github.sha }} .
-      - name: Create tar file
-        run: docker save --output vuln-image.tar docker.io/elequiel/wise-currency:${{ github.sha }}
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
