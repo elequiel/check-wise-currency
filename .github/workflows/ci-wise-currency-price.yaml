@@ -21,12 +21,18 @@ jobs:
           password: ${{secrets.DOCKER_PASSWORD}}
       - name: Enable build for multiple platform
         run: docker buildx create --driver=docker-container --name=container --use
-      - name: Build image amd64
+      - name: Build image amd64 for scanning
         run: docker buildx build --platform linux/amd64 --load -t docker.io/elequiel/wise-currency:${{ github.sha }} .
       - name: Create tar file
         run: docker save --output vuln-image.tar docker.io/elequiel/wise-currency:${{ github.sha }}
-      - name: Run Trivy vulnerability scanner in tarball mode
+      - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
-          input: /github/workspace/vuln-image.tar
+          image-ref: 'docker.io/elequiel/wise-currency:${{ github.sha }}'
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
+      - name: Build and push image
+        run: docker buildx build --platform linux/amd64,linux/arm64 --push -t docker.io/elequiel/wise-currency:${{ github.sha }} .
