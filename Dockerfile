@@ -1,4 +1,4 @@
-FROM python:alpine3.19
+FROM --platform=$BUILDPLATFORM python:alpine3.19
 
 COPY . /app
 
