@@ -22,7 +22,7 @@ jobs:
       - name: Enable build for multiple platform
         run: docker buildx create --use
       - name: Build image
-        run: docker buildx build --platform linux/amd64,linux/arm64 -o type=local,dest=$PATH -t docker.io/elequiel/wise-currency:${{ github.sha }} .
+        run: docker buildx build --platform linux/amd64,linux/arm64 -o type=bin --builder=container  -t docker.io/elequiel/wise-currency:${{ github.sha }} .
       - name: Create tar file
         run: docker save --output vuln-image.tar docker.io/elequiel/wise-currency:${{ github.sha }}
       - name: Run Trivy vulnerability scanner in tarball mode
