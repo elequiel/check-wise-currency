@@ -2,8 +2,6 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-replicaCount: 1
-
 image:
   repository: nginx
   pullPolicy: IfNotPresent
@@ -11,7 +9,7 @@ image:
   tag: ""
 
 cronSpec:
-  schedule: "0 6-23 * * *"
+  schedule: "0 0-23 * * *"
 
 podAnnotations: {}
 
