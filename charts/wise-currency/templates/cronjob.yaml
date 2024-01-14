@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: "cron-{{ include "wise-currency.name" . }}"
+spec:
+  schedule: "{{.Values.cronSpec.schedule}}"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: "cron-{{ include "wise-currency.name" . }}"
+            image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+            imagePullPolicy: {{ .Values.image.pullPolicy }}
+          restartPolicy: OnFailure
