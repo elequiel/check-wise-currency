@@ -11,6 +11,12 @@ image:
 cronSpec:
   schedule: "0 0-23 * * *"
 
+secret:
+  CHAT_ID: ""
+  TELEGRAM_API_KEY: ""
+  SOURCE_CURRENCY: "BRL"
+  TARGET_CURRENCY: "NZD"
+
 podAnnotations: {}
 
 resources: {}
