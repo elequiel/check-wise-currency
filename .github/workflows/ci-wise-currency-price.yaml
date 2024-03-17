@@ -33,4 +33,4 @@ jobs:
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
       - name: Build and push image
-        run: docker buildx build --platform linux/amd64,linux/aarch64 --push -t docker.io/elequiel/wise-currency:${{ github.sha }} .
+        run: docker buildx build --no-cache --platform linux/amd64,linux/aarch64 --push -t docker.io/elequiel/wise-currency:${{ github.sha }} .
