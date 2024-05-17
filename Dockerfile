@@ -1,5 +1,4 @@
-FROM --platform=$BUILDPLATFORM python:alpine3.19
-RUN apk update && apk upgrade
+FROM python:3.9-slim
 
 COPY . /app
 
@@ -11,5 +10,3 @@ ARG TELEGRAM_API_KEY=defaultValue
 ARG CHAT_ID=defaultValue
 ARG SOURCE_CURRENCY=defaultValue
 ARG TARGET_CURRENCY=defaultValue
-
-ENTRYPOINT [ "python3", "main.py" ]
