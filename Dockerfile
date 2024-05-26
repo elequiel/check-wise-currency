@@ -12,4 +12,4 @@ ARG CHAT_ID=defaultValue
 ARG SOURCE_CURRENCY=defaultValue
 ARG TARGET_CURRENCY=defaultValue
 
-ENTRYPOINT [ "python3", "main.py" ]
+CMD [ "python3", "main.py" ]
