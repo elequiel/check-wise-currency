@@ -1,5 +1,4 @@
-FROM --platform=$BUILDPLATFORM python:alpine3.19
-RUN apk update && apk upgrade
+FROM python:3.9-slim
 
 COPY . /app
 
